@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package server;
+option go_package ="/server";
+
+import "google/protobuf/empty.proto";
+
+service EventIngress {
+  rpc reportEvent(Event) returns (google.protobuf.Empty) {}
+}
+
+message Event {
+  message EventPayload {
+    string someValue = 1;
+  }
+  message EventMeta {
+    string originatorId = 1;
+  }
+
+  EventMeta meta = 1;
+  repeated EventPayload payload = 2;
+}
+
