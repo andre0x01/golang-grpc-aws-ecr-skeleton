@@ -8,7 +8,6 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 	"log"
 	"net"
-	"os"
 )
 
 type eventIngressServer struct {
@@ -47,6 +46,5 @@ func main() {
 	pb.RegisterEventIngressServer(grpcServer, &eventIngressServer{})
 	if err := grpcServer.Serve(listener); err != nil {
 		log.Fatalf("Can't listen on %s", defaultPort)
-		os.Exit(1)
 	}
 }
