@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Containerize
+    - name: Containerize (including test execution)
       run: |
         docker build -t app-image .
 
@@ -34,6 +34,5 @@ jobs:
         ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
         IMAGE_TAG: ${{ secrets.DOCKER_IMAGE_PREFIX }}-${{ github.sha }}
       run: |
-        echo $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
