@@ -17,5 +17,16 @@ jobs:
       run: |
         docker build -t app-image .
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.ECR_AWS_SECRET_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Login to AWS ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
 
 
